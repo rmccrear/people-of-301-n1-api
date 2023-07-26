@@ -18,9 +18,13 @@ const express = require('express');
 // create our webserver app
 const app = express();
 
-// define the port
-const port = 3000;
 
+// load our .env file
+// don't forget to npm install dotenv
+require('dotenv').config()
+
+// define the port
+const port = process.env.PORT || 3002;
 
 const data = [
   {
@@ -116,12 +120,16 @@ app.get('/search-by-home-state', (request, response) => {
   response.send(peopleOfState);
 })
 
-app.get('/find-by-id', (request, response) => {
+app.get('/find-by-id', (request, response, next) => {
   // get id from query
   // ?id=123
   let id = request.query.id;
+  if(!id) {
+    // return response.status(500).send({error: "please include an id"})
+    return next(new Error("Id required in query!!!"));
+  }
   let person = data.find((p) => p.id === id )
-  response.send(new Person(person));
+  response.status(200).send(new Person(person));
 })
 
 
@@ -177,14 +185,16 @@ app.get('/justine', (request, response) => {
 });
 
 
+// catch all for not found
+// this will be a 404.
+app.get('*', (request, response) => {
+  response.status(404).send("Not found!!!");
+});
 
 
-
-
-
-
-
-
+app.use((error, request, response, next) => {
+  response.status(500).send({error: error.message});
+});
 
 
 // start the web app on port 3000
