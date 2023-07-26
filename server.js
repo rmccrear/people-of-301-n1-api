@@ -23,6 +23,9 @@ const app = express();
 // don't forget to npm install dotenv
 require('dotenv').config()
 
+// import data
+// const data = require("data.json");
+
 // define the port
 const port = process.env.PORT || 3002;
 
@@ -123,6 +126,7 @@ app.get('/search-by-home-state', (request, response) => {
 app.get('/find-by-id', (request, response, next) => {
   // get id from query
   // ?id=123
+  console.log(request.query);
   let id = request.query.id;
   if(!id) {
     // return response.status(500).send({error: "please include an id"})
