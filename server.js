@@ -24,66 +24,10 @@ const app = express();
 require('dotenv').config()
 
 // import data
-// const data = require("data.json");
+const data = require("./data.json");
 
 // define the port
 const port = process.env.PORT || 3002;
-
-const data = [
-  {
-    id: "1",
-    name: "Robert",
-    homeState: "Taiwan",
-    favTea: "Green",
-    favNum: 101,
-    favCol: "Red"
-  },
-  {
-    id: "3",
-    name: "Bianca",
-    homeState: "Florida",
-    favTea: "Chai",
-    favNum: 3,
-    favColor: "Green",
-  },
-  {
-    id: "21",
-    name: "Justine",
-    homeState: "Tennessee",
-    favBook: "The Bluest Eye"
-  },
-  {
-    id: "4",
-    name: "Ajamu",
-    homeState: "Louisiana",
-    favDay: "My BDay"
-  },
-  {
-    id: "5",
-    name: "Gerard",
-    homeState: "Louisiana",
-    favGame: "Hollow Knight",
-  },
-
-  {
-    id: "7",
-    name: "Justin",
-    homeState: "Tennessee"
-  },
-  {
-    id: "6",
-    name: "Andrea",
-    homeState: "Tennessee",
-    favColor: "Purple",
-    favCar: "65 Chevy",
-  },
-  {
-    id: "8",
-    name: "Anya",
-    homeState: "Mississippi"
-  }
-];
-
 
 class Person {
   constructor(personObj) {
